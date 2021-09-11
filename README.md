@@ -1,5 +1,5 @@
 # QtSpellChecker
-Spell check class and Find/Relace dialog written for Qt5
+Spell check class and Find/Replace dialog written for Qt5
 
 Qt based class with no dependencies on other libraries.
 
