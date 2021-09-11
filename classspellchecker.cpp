@@ -36,7 +36,6 @@ bool ClassSpellChecker::parseDictionaryFile(QFile *dictionaryFile)
         QTextStream inStream(dictionaryFile);
         QString dictionaryData = inStream.readAll();
         dictionaryData.replace('\r','\n');
-        //        QStringList dictionaryDataList = dictionaryData.split('\n',QString::SkipEmptyParts);
         dictionary = QSet<QString>::fromList(dictionaryData.split('\n',QString::SkipEmptyParts));
         dictionaryFile->close();
         return (dictionary.count() > 0);//hopefully true
@@ -214,7 +213,7 @@ bool ClassSpellChecker::writeWordsToDictionary(QStringList wordList)
     if(dictionaryFile->open(QIODevice::Append | QIODevice::Text)){
         QTextStream out(dictionaryFile);
         foreach (QString word, wordList) {
-            out << word.toLower() << endl;
+            out << word.toLower() << Qt::endl;
             dictionary.insert(word.toLower());
             substituteWords.remove(word);
             ignoreWordsList.removeAll(word);

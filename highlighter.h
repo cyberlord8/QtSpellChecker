@@ -36,7 +36,6 @@ class Highlighter : public QSyntaxHighlighter
 
 public:
     Highlighter(QTextDocument *parent = nullptr);
-//    ~Highlighter();
 
     void addHighlightRule(QString word);
     void removeHighlightRule(QString word);

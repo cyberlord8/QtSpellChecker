@@ -26,11 +26,6 @@ Highlighter::Highlighter(QTextDocument *parent)
     spellingErrorFormat.setUnderlineStyle(QTextCharFormat::WaveUnderline);
 }//Highlighter
 
-//Highlighter::~Highlighter()
-//{
-//    qDebug() << "Deleting Highlighter...";
-//}//Highlighter
-
 void Highlighter::addHighlightRule(QString word)
 {
     HighlightingRule rule;

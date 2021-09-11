@@ -41,8 +41,6 @@
 
 #include "highlighter.h"
 
-//#include "classsettings.h"
-
 class ClassSpellChecker : public QObject
 {
     Q_OBJECT
@@ -52,7 +50,6 @@ class ClassSpellChecker : public QObject
     QTextDocument *textDocument;
     QPlainTextEdit *textEditor;
     Highlighter *spellCheckHighlighter;
-//    DialogEditor *editorDialog;
     bool isSpellCheckerValid = false;
     bool isRehighlighting = false;
     bool parseDictionaryFile(QFile *dictionaryFile);
@@ -66,8 +63,6 @@ class ClassSpellChecker : public QObject
     bool IsCapitalized(QString word);
     bool IsMixedCase(QString word);
 
-//    ClassSettings *settings;
-
 public:
     explicit ClassSpellChecker(bool allowRecursion,
                                QFile *dictionaryFile,
@@ -79,8 +74,6 @@ public:
     bool addWordtoDictionary(QString word);
     bool addWordtoDictionary(QStringList wordList);
     void createContextMenu(const QPoint &pos);
-
-//    void reHighlight();
 
     //spellCheck returns a map of words not found in the dictionary and a list of possible substitutes
     QMap<QString, QStringList> spellCheck(QStringList wordList, bool clearLists);

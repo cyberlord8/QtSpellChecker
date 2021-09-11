@@ -1,3 +1,22 @@
+/*
+ * Copyright 2019 Green Radio Software Solutions (GRSS)
+ * Released under GPL3 License
+ * QtSpellChecker - A spell check library written in Qt
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * */
+
 #include "dialogeditor.h"
 #include "ui_dialogeditor.h"
 
@@ -26,13 +45,8 @@ DialogEditor::DialogEditor(QPlainTextEdit *plaintextEditor, QWidget *parent) :
     connect(replaceDialog, &DialogFindReplace::signalReplaceAllText,
             this, &DialogEditor::slotReplaceAllText);
 
-//    this->settings = settings;
-//    this->move(settings->configSettings.editDialogSettings.getPosition());
-//    this->resize(settings->configSettings.editDialogSettings.getSize());
     this->plaintextEditor = plaintextEditor;
-//    qDebug() << this->plaintextEditor->toPlainText() << ui->plainTextEdit->toPlainText();
     ui->plainTextEdit->setPlainText(plaintextEditor->toPlainText());
-//    qDebug() << this->plaintextEditor->toPlainText() << ui->plainTextEdit->toPlainText();
     connect(ui->plainTextEdit, &QPlainTextEdit::textChanged,
             this, &DialogEditor::slotPlaintextChanged);
     ui->plainTextEdit->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -44,13 +58,10 @@ DialogEditor::DialogEditor(QPlainTextEdit *plaintextEditor, QWidget *parent) :
     dictionaryFile->setFileName(QApplication::applicationDirPath()+"/../spellchecker/dictionary.txt");
     if(!dictionaryFile->exists()){
         spellCheckerThread = nullptr;
-        //        log->write("Warning... Spellcheck dictionary not found",false);
     }
     else {
         spellCheckerThread = new QThread(this);
-        //        log->write("Spellcheck dictionary found... OK",false);
         spellChecker = new ClassSpellChecker(false, dictionaryFile,ui->plainTextEdit,nullptr);
-        //        spellChecker->setObjectName("");
         if(spellCheckerThread != nullptr){
             spellChecker->moveToThread(spellCheckerThread);
         }
@@ -64,21 +75,8 @@ DialogEditor::~DialogEditor()
     delete ui;
 }
 
-void DialogEditor::moveEvent(QMoveEvent *event)
-{
-//    settings->configSettings.editDialogSettings.setPosition(this->pos());
-//    settings->writeSettings();
-}
-
-void DialogEditor::resizeEvent(QResizeEvent *event)
-{
-//    settings->configSettings.editDialogSettings.setSize(this->size());
-//    settings->writeSettings();
-}
-
 void DialogEditor::slotFindNext(QString textToFind, bool matchCase, bool matchWholeWord, bool reverse)
 {
-    //    qDebug() << Q_FUNC_INFO << textToFind << matchCase << matchWholeWord << reverse;
     QTextDocument::FindFlags options;
     if(matchCase)
         options |= QTextDocument::FindCaseSensitively;
@@ -88,11 +86,9 @@ void DialogEditor::slotFindNext(QString textToFind, bool matchCase, bool matchWh
         options |= QTextDocument::FindBackward;
 
     if(ui->plainTextEdit->find(textToFind, options)){
-        //        qDebug() << "Found: " << textToFind;
         this->activateWindow();
     }//if found
     else {
-        //        qDebug() << textToFind << " not found!";
         if(!replaceAll){
             QMessageBox messageBox;
             QString errorString;
@@ -126,7 +122,6 @@ void DialogEditor::slotFindNext(QString textToFind, bool matchCase, bool matchWh
 void DialogEditor::slotReplaceText(QString textToReplace, QString replacementText,
                                    bool matchCase, bool matchWholeWord, bool reverse)
 {
-    //    qDebug() << Q_FUNC_INFO << textToReplace << replacementText << matchCase << matchWholeWord << reverse;
     if(ui->plainTextEdit->textCursor().hasSelection()){
         ui->plainTextEdit->textCursor().insertText(replacementText);
         if(replaceAll){
@@ -144,8 +139,6 @@ void DialogEditor::slotReplaceText(QString textToReplace, QString replacementTex
 
 void DialogEditor::slotReplaceAllText(QString textToReplace, QString replacementText, bool matchCase, bool matchWholeWord, bool reverse)
 {
-//    qDebug() << Q_FUNC_INFO << textToReplace << replacementText;
-
     atStart = atEnd = false;
     replaceAll = true;
     numberReplacements = 0;
@@ -192,7 +185,6 @@ void DialogEditor::slotPlaintextChanged()
 
 void DialogEditor::slotContextMenuRequested(const QPoint &pos)
 {
-    //    qDebug() << "Custom Context Menu...";
     if(this->spellChecker != nullptr){
         spellChecker->createContextMenu(pos);
     }//if spellChecker is valid
@@ -203,9 +195,7 @@ void DialogEditor::slotContextMenuRequested(const QPoint &pos)
 
 void DialogEditor::on_buttonBox_accepted()
 {
-//    qDebug() << this->plaintextEditor->toPlainText() << ui->plainTextEdit->toPlainText();
     this->plaintextEditor->setPlainText(ui->plainTextEdit->toPlainText());
-//    qDebug() << this->plaintextEditor->toPlainText() << ui->plainTextEdit->toPlainText();
 }
 
 void DialogEditor::on_buttonBox_rejected()

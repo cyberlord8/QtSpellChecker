@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     dictionaryFile = new QFile(qApp->applicationDirPath()+"/../spellchecker/dictionary.txt",this);
     if(dictionaryFile->exists()){
         ui->plainTextEditEditor->appendPlainText("Found dictionary... OK");
-        spellChecker = new ClassSpellChecker(false, dictionaryFile, ui->plainTextEditEditor);
+        spellChecker = new ClassSpellChecker(true, dictionaryFile, ui->plainTextEditEditor);
         spellCheckerThread = new QThread(this);
         spellChecker->moveToThread(spellCheckerThread);
     }
