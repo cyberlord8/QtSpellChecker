@@ -10,8 +10,7 @@ Uses QSyntaxHighlighter to mark misspelled words.
 ![image](https://user-images.githubusercontent.com/8164529/132950308-129c9bd8-4830-4bde-a8a8-159ba877cb4b.png)
 
 Also includes a Find/Replace dialog.
-![image](https://user-images.githubusercontent.com/8164529/132951507-828434bc-5f65-4bd5-90f0-b15d5b920e91.png)
-
+![image](https://user-images.githubusercontent.com/8164529/132951546-6afe9716-f862-416f-a107-17e6692bfff4.png)
 
    ```
    public:
