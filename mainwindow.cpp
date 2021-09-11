@@ -34,8 +34,10 @@ MainWindow::MainWindow(QWidget *parent) :
     if(dictionaryFile->exists()){
         ui->plainTextEditEditor->appendPlainText("Found dictionary... OK");
         spellChecker = new ClassSpellChecker(true, dictionaryFile, ui->plainTextEditEditor);
-        spellCheckerThread = new QThread(this);
-        spellChecker->moveToThread(spellCheckerThread);
+        //threading not used until signal/slots are incoporated
+        //seems to run fine in main thread
+//        spellCheckerThread = new QThread(this);
+//        spellChecker->moveToThread(spellCheckerThread);
     }
     else {
         spellChecker = nullptr;
@@ -50,7 +52,7 @@ MainWindow::~MainWindow()
     if(spellChecker != nullptr){
         delete spellChecker;
         delete dictionaryFile;
-        delete spellCheckerThread;
+//        delete spellCheckerThread;
     }
 }//MainWindow
 

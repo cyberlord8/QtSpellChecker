@@ -45,7 +45,7 @@ private:
     Ui::MainWindow *ui;
 
     ClassSpellChecker *spellChecker = nullptr;
-    QThread *spellCheckerThread = nullptr;
+//    QThread *spellCheckerThread = nullptr; //removed as not used for direct calls to class methods
     QFile *dictionaryFile = nullptr;
     QString editorDocument;
 };
