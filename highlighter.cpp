@@ -1,7 +1,7 @@
 /*
  * Copyright 2019 Green Radio Software Solutions (GRSS)
  * Released under GPL3 License
- * QtSpellChecker - A spell check library written in Qt
+ * QSyntaxHighlighter - A syntax highlighter written in Qt
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
