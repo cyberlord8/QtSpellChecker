@@ -12,7 +12,7 @@ Stores dictionary words in a QSet (hash) for quick lookups.
 
 Uses QSyntaxHighlighter to mark misspelled words. 
 
-You can change the location of the distionary.txt file, I have it located inappfolder/../spellchecker as I had other apps dependent on the same dictionary.
+<b>You can change the location of the dictionary.txt file, I have it located in <i>appfolder/../spellchecker/</i> as I had other apps dependent on the same dictionary.</b>
 
 ![image](https://user-images.githubusercontent.com/8164529/132950308-129c9bd8-4830-4bde-a8a8-159ba877cb4b.png)
 
