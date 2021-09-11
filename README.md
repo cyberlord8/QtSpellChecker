@@ -28,4 +28,4 @@ Uses QSyntaxHighlighter to mark misspelled words.
 
     bool getIsRehighlighting() const;
     void setIsRehighlighting(bool value);
-    ```
+ 
