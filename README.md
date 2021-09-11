@@ -2,7 +2,7 @@
 
 I wrote and shared this 2 years ago, but somehow the repo got messed up and was missing files and would not compile.
 
-Here is is again all fixed/cleaned up.
+Here it is again all fixed/cleaned up.
 
 ## Spell Check Class and Find/Replace Dialog written for Qt5
 
