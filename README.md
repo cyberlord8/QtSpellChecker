@@ -1,5 +1,5 @@
 # QtSpellChecker
-Spell check class written for Qt5
+Spell check class and Find/Relace dialog written for Qt5
 
 Qt based class with no dependencies on other libraries.
 
@@ -8,6 +8,9 @@ Stores dictionary words in a QSet (hash) for quick lookups.
 Uses QSyntaxHighlighter to mark misspelled words. 
 
 ![image](https://user-images.githubusercontent.com/8164529/132950308-129c9bd8-4830-4bde-a8a8-159ba877cb4b.png)
+
+Also includes a Find/Replace dialog.
+![image](https://user-images.githubusercontent.com/8164529/132951280-e87362e9-63ca-490c-aafa-a3999f1ee98f.png)
 
 
    ```
