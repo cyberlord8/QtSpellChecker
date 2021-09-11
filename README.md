@@ -7,14 +7,19 @@ Stores dictionary words in a QSet (hash) for quick lookups.
 
 Uses QSyntaxHighlighter to mark misspelled words. 
 
-    // class constructor - pass QFile, QPlaintextEdit, and optional parent
-    explicit ClassSpellChecker(QFile *dictionaryFile, QPlainTextEdit *textEditor, QObject *parent = nullptr);
-    ~ClassSpellChecker();
+![image](https://user-images.githubusercontent.com/8164529/132950308-129c9bd8-4830-4bde-a8a8-159ba877cb4b.png)
+
+
+   ```
+   public:
+    explicit ClassSpellChecker(bool allowRecursion,
+                               QFile *dictionaryFile,
+                               QPlainTextEdit *textEditor,
+                               QObject *parent = nullptr);
 
     bool isValid();//did ClassSpellChecker initialize OK?
     bool addWordtoDictionary(QString word);
     bool addWordtoDictionary(QStringList wordList);
-    //creates context menu of suggested words
     void createContextMenu(const QPoint &pos);
 
     //spellCheck returns a map of words not found in the dictionary and a list of possible substitutes
@@ -23,3 +28,4 @@ Uses QSyntaxHighlighter to mark misspelled words.
 
     bool getIsRehighlighting() const;
     void setIsRehighlighting(bool value);
+    ```
