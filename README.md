@@ -1,5 +1,5 @@
 # QtSpellChecker
-Spell check class written for Qt
+Spell check class written for Qt5
 
 Qt based class with no dependencies on other libraries.
 
