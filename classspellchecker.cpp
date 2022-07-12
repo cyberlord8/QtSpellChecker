@@ -20,15 +20,17 @@
 #include "classspellchecker.h"
 #include "dialogeditor.h"
 
+#include <QSet>
+
 bool ClassSpellChecker::getIsRehighlighting() const
 {
     return isRehighlighting;
-}
+}//getIsRehighlighting
 
 void ClassSpellChecker::setIsRehighlighting(bool value)
 {
     isRehighlighting = value;
-}
+}//setIsRehighlighting
 
 bool ClassSpellChecker::parseDictionaryFile(QFile *dictionaryFile)
 {
@@ -36,7 +38,9 @@ bool ClassSpellChecker::parseDictionaryFile(QFile *dictionaryFile)
         QTextStream inStream(dictionaryFile);
         QString dictionaryData = inStream.readAll();
         dictionaryData.replace('\r','\n');
-        dictionary = QSet<QString>::fromList(dictionaryData.split('\n',QString::SkipEmptyParts));
+        QStringList list = dictionaryData.split('\n', Qt::SkipEmptyParts);
+        QSet<QString> dictionary1(list.begin(), list.end());
+        this->dictionary = dictionary1;
         dictionaryFile->close();
         return (dictionary.count() > 0);//hopefully true
     }//if file open
@@ -299,7 +303,7 @@ bool ClassSpellChecker::isValid()
 
 bool ClassSpellChecker::addWordtoDictionary(QString word)
 {
-    return writeWordsToDictionary(word.split(' ',QString::SkipEmptyParts));
+    return writeWordsToDictionary(word.split(' ', Qt::SkipEmptyParts));
 }//addWordtoDictionary word
 
 bool ClassSpellChecker::addWordtoDictionary(QStringList wordList)
@@ -346,7 +350,7 @@ void ClassSpellChecker::createContextMenu(const QPoint &pos)
             QApplication::processEvents();
         }//ignoreAllAction
         else if (action == addWordtoDictionaryAction) {
-            writeWordsToDictionary(selectedWord.split(' ',QString::SkipEmptyParts));
+            writeWordsToDictionary(selectedWord.split(' ', Qt::SkipEmptyParts));
         }//addWordtoDictionaryAction
         else {
             if(!(action == nullptr)){
@@ -393,7 +397,7 @@ QMap<QString, QStringList> ClassSpellChecker::spellCheck(QStringList wordList, b
         substituteWords.clear();
         spellCheckHighlighter->clearHighlightRules();
     }
-    QRegExp regex("[^A-Za-z0-9']");
+    QRegularExpression regex("[^A-Za-z0-9']");
     foreach (QString worda, wordList) {
         worda.replace(regex, " ");
         if(!worda.contains(' ')){
@@ -411,7 +415,7 @@ QMap<QString, QStringList> ClassSpellChecker::spellCheck(QStringList wordList, b
             }
         }//if no whitespace
         else {
-            foreach (QString wordb, worda.split(' ',QString::SkipEmptyParts)) {
+            foreach (QString wordb, worda.split(' ', Qt::SkipEmptyParts)) {
                 wordb.replace(regex, " ");
                 if(!dictionary.contains(wordb.toLower()) && wordb.size() > 1 && !isNumber(wordb)){
                     if(!ignoreWordsList.contains(wordb)){
@@ -441,18 +445,18 @@ QMap<QString, QStringList> ClassSpellChecker::spellCheck(QString words, bool cle
         spellCheckHighlighter->clearHighlightRules();
     }
 
-    QRegExp regex("[^A-Za-z0-9']");
+    QRegularExpression regex("[^A-Za-z0-9']");
     QStringList wordList;
     if(!words.endsWith(' ') && !words.endsWith('.') && !words.endsWith(", ")){
         words.replace(regex, " ");
-        wordList = words.split(' ',QString::SkipEmptyParts);
+        wordList = words.split(' ', Qt::SkipEmptyParts);
         if(!wordList.isEmpty()){
             wordList.removeLast();
         }
     }
     else {
         words.replace(regex, " ");
-        wordList = words.split(' ',QString::SkipEmptyParts);
+        wordList = words.split(' ', Qt::SkipEmptyParts);
     }
     foreach (QString word, wordList) {
         if(!isContraction(word)){
@@ -469,7 +473,7 @@ QMap<QString, QStringList> ClassSpellChecker::spellCheck(QString words, bool cle
         }//if not a contracted word
         else {
             if(word.contains("n't")){
-                QStringList wordList = word.split("n't",QString::SkipEmptyParts);
+                QStringList wordList = word.split("n't",Qt::SkipEmptyParts);
                 if(!dictionary.contains(wordList.first().toLower()) && wordList.first().size() > 1 && !isNumber(word)){
                     if(!ignoreWordsList.contains(wordList.first())){
                         substituteWords.insert(wordList.first(), findSubstituteWords(wordList.first()));
@@ -482,7 +486,7 @@ QMap<QString, QStringList> ClassSpellChecker::spellCheck(QString words, bool cle
                 }//if word not found in dictionary
             }//if words contains n't
             else {
-                QStringList wordList = word.split('\'',QString::SkipEmptyParts);
+                QStringList wordList = word.split('\'',Qt::SkipEmptyParts);
                 if(wordList.isEmpty())
                     continue;
                 if(!dictionary.contains(wordList.first().toLower()) && wordList.first().size() > 1 && !isNumber(word)){

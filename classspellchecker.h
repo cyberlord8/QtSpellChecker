@@ -30,7 +30,7 @@
 #include <QList>
 #include <QTextStream>
 #include <QByteArray>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QTextDocument>
 #include <QTextCursor>
 #include <QCursor>
